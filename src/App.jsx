@@ -1,8 +1,10 @@
 import { useState } from "react";
 import "./App.css";
-
+// import PackingLists from "./PackingList/PackingList";
+// import PlacesToVisit from "./PlacesToVisit/PlacesToVisit";
+import PlacesDetails from "./PlacesToVisit/PlacesToVisit";
 function App() {
-  return <div className="font-bold">Hello world</div>;
+  return <PlacesDetails />;
 }
 
 export default App;
