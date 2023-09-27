@@ -43,33 +43,34 @@ const PlacesDetails = () => {
       />
       <button onClick={getPlaceDetails}>Click</button>
       <br />
-      {loading && <PlaceCards placeName={placeNames[2]} />}
+
+      {loading && <ShowPlace placeNames={placeNames} />}
     </div>
   );
 };
 
 function PlaceCards({ placeName }) {
   return (
-    <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-2 my-4">
       <a href="#" className="no-underline">
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center ">
           {placeName.properties.address_line1}
         </h5>
       </a>
-      <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-left">
+      {/* <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-left">
         <span className="inline font-semibold">About - </span>
         {placeName.properties.datasource.raw.description}
-      </p>
+      </p> */}
       <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-left">
         <span className="inline font-semibold">Address - </span>
         {placeName.properties.formatted}
       </p>
-      <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-left">
+      {/* <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-left">
         <span className="inline font-semibold">Timing - </span>
         {placeName.properties.datasource.raw.opening_hours}
-      </p>
+      </p> */}
       <a
-        href={placeName.properties.datasource.raw.website}
+        href={`https://www.openstreetmap.org/search?query=${placeName.properties.city}#map=15/${placeName.geometry.coordinates[1]}/${placeName.geometry.coordinates[0]}}`}
         className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 no-underline"
         target="new"
       >
@@ -90,6 +91,16 @@ function PlaceCards({ placeName }) {
           />
         </svg>
       </a>
+    </div>
+  );
+}
+
+function ShowPlace({ placeNames }) {
+  return (
+    <div className="flex flex-wrap">
+      {placeNames.map((placeName) => (
+        <PlaceCards placeName={placeName} />
+      ))}
     </div>
   );
 }
